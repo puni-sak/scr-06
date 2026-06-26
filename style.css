@@ -6,6 +6,18 @@ body {
     text-align: center;
 }
 
+#button1 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+#button2 {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+}
+
 h2 {
     padding: 5px 0px 5px 0px;
     margin: 10px 100px 5px 100px;
@@ -79,16 +91,13 @@ img {
     left: 340px;
 }
 
-button {
+#ok {
     width: 100px;
     height: 70px;
     font-size: 50px;
     text-align: center;
     padding-top: 0px;
     color: white;
-}
-
-#ok {
     position: absolute;
     top: 600px;
     left:580px;
@@ -96,6 +105,12 @@ button {
 }
 
 #ng {
+    width: 100px;
+    height: 70px;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 0px;
+    color: white;
     position: absolute;
     top: 600px;
     left: 700px;
@@ -103,6 +118,12 @@ button {
 }
 
 #gameover {
+    width: 100px;
+    height: 70px;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 0px;
+    color: white;
     position: absolute;
     top: 600px;
     left: 820px;
@@ -111,6 +132,12 @@ button {
 }
 
 #back {
+    width: 100px;
+    height: 70px;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 0px;
+    color: white;
     position: absolute;
     top: 600px;
     left: 940px;
