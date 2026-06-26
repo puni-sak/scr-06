@@ -1,0 +1,147 @@
+body {
+    width: 1080px;
+    height: 810px;
+    background-image: url(./images/background.jpg);
+    background-size: cover;
+    text-align: center;
+}
+
+h2 {
+    padding: 5px 0px 5px 0px;
+    margin: 10px 100px 5px 100px;
+    background-color: white;
+    border: solid 3px blue;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    margin: 3px;
+}
+
+.a {
+    position: absolute;
+    top: 80px;
+    left: 130px;
+}
+
+.b {
+    position: absolute;
+    top: 80px;
+    left: 340px;
+}
+
+.c {
+    position: absolute;
+    top: 80px;
+    left: 550px;
+}
+
+.d {
+    position: absolute;
+    top: 80px;
+    left: 760px;
+}
+
+.e {
+    position: absolute;
+    top: 290px;
+    left: 130px;
+}
+
+.f {
+    position: absolute;
+    top: 290px;
+    left: 340px;
+}
+
+.g {
+    position: absolute;
+    top: 290px;
+    left: 550px;
+}
+
+.h {
+    position: absolute;
+    top: 290px;
+    left: 760px;
+}
+
+.i {
+    position: absolute;
+    top: 500px;
+    left: 130px;
+}
+
+.j {
+    position: absolute;
+    top: 500px;
+    left: 340px;
+}
+
+button {
+    width: 100px;
+    height: 70px;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 0px;
+    color: white;
+}
+
+#ok {
+    position: absolute;
+    top: 600px;
+    left:580px;
+    background-color: red;
+}
+
+#ng {
+    position: absolute;
+    top: 600px;
+    left: 700px;
+    background-color: blue;
+}
+
+#gameover {
+    position: absolute;
+    top: 600px;
+    left: 820px;
+    background-color: black;
+    font-size: small;
+}
+
+#back {
+    position: absolute;
+    top: 600px;
+    left: 940px;
+    background-color: gray;
+    font-size: small;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.chose {
+    border: solid 3px blue;
+}
+
+#maru, #batsu {
+    position: absolute;
+    top: 140px;
+    left: 270px;
+    z-index: 10000;
+    pointer-events: none;
+    width: 500px;
+    height: 500px;
+    
+}
+
+.mienai {
+    display: none;
+}
+
+.mieru {
+    display: flex;
+}
