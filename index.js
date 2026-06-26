@@ -1,4 +1,33 @@
 (() => {
+window.addEventListener('load', function(){
+
+// フルスクリーン表示
+document.getElementById('button1').addEventListener('click', function(){
+
+// Chrome & Firefox v64以降
+if( document.body.requestFullscreen ) {
+ document.body.requestFullscreen();
+
+// Safari & Edge & Chrome v68以前
+} else if( document.body.webkitRequestFullscreen ) {
+  document.body.webkitRequestFullscreen();
+}
+});
+
+// フルスクリーン解除
+document.getElementById('button2').addEventListener('click', function(){
+
+// Chrome & Firefox v64以降
+if( document.exitFullscreen ) {
+  document.exitFullscreen();
+
+// Safari & Edge & Chrome v44以前
+} else if( document.webkitCancelFullScreen ) {
+  document.webkitCancelFullScreen();
+}
+});
+});
+
 //答える問題を選択
 // 要素を取得
 const choose = document.querySelectorAll(".choose");
