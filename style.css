@@ -31,61 +31,61 @@ img {
     margin: 3px;
 }
 
-.a {
+#a {
     position: absolute;
     top: 80px;
     left: 130px;
 }
 
-.b {
+#b {
     position: absolute;
     top: 80px;
     left: 340px;
 }
 
-.c {
+#c {
     position: absolute;
     top: 80px;
     left: 550px;
 }
 
-.d {
+#d {
     position: absolute;
     top: 80px;
     left: 760px;
 }
 
-.e {
+#e {
     position: absolute;
     top: 290px;
     left: 130px;
 }
 
-.f {
+#f {
     position: absolute;
     top: 290px;
     left: 340px;
 }
 
-.g {
+#g {
     position: absolute;
     top: 290px;
     left: 550px;
 }
 
-.h {
+#h {
     position: absolute;
     top: 290px;
     left: 760px;
 }
 
-.i {
+#i {
     position: absolute;
     top: 500px;
     left: 130px;
 }
 
-.j {
+#j {
     position: absolute;
     top: 500px;
     left: 340px;
@@ -154,6 +154,10 @@ a {
     border: solid 3px blue;
 }
 
+.noChoose {
+    filter: brightness(60%);
+}
+
 #maru, #batsu {
     position: absolute;
     top: 140px;
@@ -162,7 +166,16 @@ a {
     pointer-events: none;
     width: 500px;
     height: 500px;
-    
+}
+
+#gameoverImg, #clear {
+    position: absolute;
+    top: 140px;
+    left: 140px;
+    z-index: 10000;
+    pointer-events: none;
+    width: 800px;
+    height: 300px;
 }
 
 .mienai {
