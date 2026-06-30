@@ -6,16 +6,24 @@ body {
     text-align: center;
 }
 
-#button1 {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+.btn {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin: 30px;
+  font-size: 40px;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #668ad8;/*ボタン色*/
+  color: #FFF;
+  border-bottom: solid 4px #627295;
+  border-radius: 3px;
 }
-
-#button2 {
-    position: absolute;
-    top: 20px;
-    left: 50px;
+.btn:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  border-bottom: none;/*線を消す*/
 }
 
 h2 {
@@ -91,60 +99,6 @@ img {
     left: 340px;
 }
 
-#ok {
-    width: 100px;
-    height: 70px;
-    font-size: 50px;
-    text-align: center;
-    padding-top: 0px;
-    color: white;
-    position: absolute;
-    top: 600px;
-    left:580px;
-    background-color: red;
-}
-
-#ng {
-    width: 100px;
-    height: 70px;
-    font-size: 50px;
-    text-align: center;
-    padding-top: 0px;
-    color: white;
-    position: absolute;
-    top: 600px;
-    left: 700px;
-    background-color: blue;
-}
-
-#gameover {
-    width: 100px;
-    height: 70px;
-    font-size: 50px;
-    text-align: center;
-    padding-top: 0px;
-    color: white;
-    position: absolute;
-    top: 600px;
-    left: 820px;
-    background-color: black;
-    font-size: small;
-}
-
-#back {
-    width: 100px;
-    height: 70px;
-    font-size: 50px;
-    text-align: center;
-    padding-top: 0px;
-    color: white;
-    position: absolute;
-    top: 600px;
-    left: 940px;
-    background-color: gray;
-    font-size: small;
-}
-
 a {
     text-decoration: none;
     color: white;
@@ -168,7 +122,7 @@ a {
     height: 500px;
 }
 
-#gameoverImg, #clear {
+#gameover, #clear {
     position: absolute;
     top: 140px;
     left: 140px;
