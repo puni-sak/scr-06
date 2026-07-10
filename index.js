@@ -1,8 +1,8 @@
 (() => {
 
-//問題を変える
+//問題文を格納
 let mondaibun1 = [
-  '問題文１',
+  '吹奏楽で使う楽器　10個答えろ',
   '問題文２',
   '問題文３',
   '問題文４',
@@ -137,7 +137,11 @@ else{
 
 let mondaibangou = 0;
 
-document.getElementById("mondaibun").innerHTML = mondaibun[0];
+const mondaibunn = document.getElementById("mondaibun");
+
+mondaibunn.innerHTML = mondaibun[0];
+
+mondaibunn.classList.remove("under");
 
 //答える問題を選択
 const choose = document.querySelectorAll(".choose");
@@ -161,6 +165,16 @@ const maru = document.getElementById('maru');
 const batsu = document.getElementById('batsu');
 const gameover = document.getElementById('gameover');
 const clear = document.getElementById('clear');
+const seikaiOto = document.getElementById('seikai');
+const fuseikaiOto = document.getElementById('fuseikai');
+const clearOto = document.getElementById('clearOto');
+const gameoverOto = document.getElementById('gameoverOto');
+const bgm = document.getElementById("bgm");
+
+bgm.volume = 0.5;
+seikaiOto.volume = 0.6;
+clearOto.volume = 0.5;
+gameoverOto.volume = 0.9;
 
 let maruKesu = function() {
   maru.classList.remove("mieru");
@@ -176,6 +190,8 @@ document.addEventListener('keydown', event => {
 
   //1が押されたらマル
   if(event.key == "1") {
+    seikaiOto.currentTime = 0;
+    seikaiOto.play();
     const chose = document.getElementsByClassName("chose");
     maru.classList.remove("mienai");
     maru.classList.add("mieru");
@@ -186,6 +202,8 @@ document.addEventListener('keydown', event => {
 
   //2が押されたらバツ
   if(event.key == "2") {
+    fuseikaiOto.currentTime = 0;
+    fuseikaiOto.play();
     batsu.classList.remove("mienai");
     batsu.classList.add("mieru");
     setTimeout(batsuKesu, 1000);
@@ -193,20 +211,67 @@ document.addEventListener('keydown', event => {
 
   //3が押されたらクリア
   if(event.key == "3") {
-    clear.classList.remove("mienai");
-    clear.classList.add("mieru");
-    let bg = mondaibangou;
+    if(clear.classList.contains("mienai")) {
+      clear.classList.remove("mienai");
+      clear.classList.add("mieru");
+      bgm.pause();
+      clearOto.currentTime = 0;
+      clearOto.play();
+    }
+    else {
+      clear.classList.remove("mieru");
+      clear.classList.add("mienai");
+    }
   }
 
   //4が押されたらゲームオーバー
   if(event.key == "4") {
-    gameover.classList.remove("mienai");
-    gameover.classList.add("mieru");
+    if(gameover.classList.contains("mienai")) {
+      gameover.classList.remove("mienai");
+      gameover.classList.add("mieru");
+      bgm.pause();
+      gameoverOto.currentTime = 0;
+      gameoverOto.play();
+    }
+    else {
+      gameover.classList.remove("mieru");
+      gameover.classList.add("mienai");
+    }
+  }
+
+  //バックスペースが押されたら前の問題へ
+  if(event.key == "Backspace") {
+    mondaibangou = mondaibangou - 1;
+    mondaibunn.classList.remove("under");
+
+    if (mondaibangou < 0) {
+      window.open("../../index.html", "_self");
+    }
+    else {
+      document.getElementById("mondaibun").innerHTML = mondaibun[mondaibangou];
+      document.getElementById("a").src = `img${mondaibangou + 1}/a.jpg`;
+      document.getElementById("b").src = `img${mondaibangou + 1}/b.jpg`;
+      document.getElementById("c").src = `img${mondaibangou + 1}/c.jpg`;
+      document.getElementById("d").src = `img${mondaibangou + 1}/d.jpg`;
+      document.getElementById("e").src = `img${mondaibangou + 1}/e.jpg`;
+      document.getElementById("f").src = `img${mondaibangou + 1}/f.jpg`;
+      document.getElementById("g").src = `img${mondaibangou + 1}/g.jpg`;
+      document.getElementById("h").src = `img${mondaibangou + 1}/h.jpg`;
+      document.getElementById("i").src = `img${mondaibangou + 1}/i.jpg`;
+      document.getElementById("j").src = `img${mondaibangou + 1}/j.jpg`;
+
+      //初期化
+      choose.forEach((t) => {
+        t.classList.remove("noChoose");
+        t.classList.remove("chose");
+      });
+    }
   }
 
   //Enterが押されたら次の問題へ
   if(event.key == "Enter") {
     mondaibangou = mondaibangou + 1;
+    mondaibunn.classList.remove("under");
 
     //10問目なら終わり
     if(mondaibangou == mondaibun.length) {
@@ -230,7 +295,6 @@ document.addEventListener('keydown', event => {
       choose.forEach((t) => {
         t.classList.remove("noChoose");
         t.classList.remove("chose");
-        console.log(choose);
       });
     }
 
@@ -238,6 +302,12 @@ document.addEventListener('keydown', event => {
     clear.classList.add("mienai");
     gameover.classList.remove("mieru");
     gameover.classList.add("mienai");
+  }
+
+  //spaceが押されたらbgm再生
+  if(event.key == "a") {
+    bgm.currentTime = 0;
+    bgm.play();
   }
 }, false);
 
@@ -248,6 +318,7 @@ window.addEventListener("DOMContentLoaded", () => {
   imgs.forEach(img => {
     img.onerror = () => {
       img.style.display = "none";   // 読み込み失敗 → 非表示
+      mondaibunn.classList.add("under");
     };
 
     const observer = new MutationObserver(() => {
