@@ -193,6 +193,13 @@ window.addEventListener("touchstart", () => {
   gameoverOto.pause();
   gameoverOto.currentTime = 0;
 }, { once: true });
+
+//連打に強くなるらしい
+function playSE(audioElement) {
+  const se = audioElement.cloneNode(); // ← 新しい音を作る
+  se.currentTime = 0;
+  se.play();
+}
   
 //キーボード操作
 const maru = document.getElementById('maru');
@@ -296,8 +303,7 @@ document.addEventListener('keydown', event => {
 
   //1が押されたらマル
   if(event.key == "1") {
-    seikaiOto.currentTime = 0;
-    seikaiOto.play();
+    playSE(seikaiOto);
     const chose = document.getElementsByClassName("chose");
     maru.classList.remove("mienai");
     maru.classList.add("mieru");
@@ -308,8 +314,7 @@ document.addEventListener('keydown', event => {
 
   //2が押されたらバツ
   if(event.key == "2") {
-    fuseikaiOto.currentTime = 0;
-    fuseikaiOto.play();
+    playSE(fuseikaiOto);
     batsu.classList.remove("mienai");
     batsu.classList.add("mieru");
     setTimeout(batsuKesu, 1000);
