@@ -1,12 +1,37 @@
 @charset "utf-8";
 
+html {
+    width: 1080px;
+    height: 910px;
+}
+
 body {
     width: 1080px;
-    height: 810px;
+    height: 910px;
+    margin: 0;
     background-image: url(./images/fv_background.webp);
     background-size: cover;
     background-position: center;
     text-align: center;
+}
+
+@keyframes blinking {
+  0%, 100% { opacity: 0;}
+  50% { opacity: 0.5;}
+}
+
+.tenmetsu {
+    animation: blinking 1s ease-in-out infinite;
+    background-color: red;
+}
+
+#tenmetsu {
+    width: 1080px;
+    height: 910px;
+}
+
+.red {
+    background-color: rgba(255, 0, 0, 0.3);
 }
 
 .btn {
@@ -14,6 +39,7 @@ body {
   width: 50px;
   height: 50px;
   margin: 30px;
+  margin-top: 200px;
   font-size: 40px;
   padding: 0.5em 1em;
   text-decoration: none;
@@ -22,6 +48,11 @@ body {
   border-bottom: solid 4px #627295;
   border-radius: 3px;
 }
+
+.sitagawa {
+    margin-top: 30px;
+}
+
 .btn:active {
   /*ボタンを押したとき*/
   -webkit-transform: translateY(4px);
@@ -30,10 +61,16 @@ body {
 }
 
 h2 {
-    padding: 5px 0px 5px 0px;
+    position: absolute;
+    top: 30px;
+    width: 900px;
+    height: 90px;
     margin: 10px 100px 5px 100px;
-    background-color: white;
-    border: solid 3px blue;
+    padding-top: 70px;
+    background-image: url(./images/mondaibun_back.png);
+    background-size: 900px;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 img {
@@ -44,62 +81,89 @@ img {
 
 #a {
     position: absolute;
-    top: 80px;
+    top: 180px;
     left: 130px;
 }
 
 #b {
     position: absolute;
-    top: 80px;
+    top: 180px;
     left: 340px;
 }
 
 #c {
     position: absolute;
-    top: 80px;
+    top: 180px;
     left: 550px;
 }
 
 #d {
     position: absolute;
-    top: 80px;
+    top: 180px;
     left: 760px;
 }
 
 #e {
     position: absolute;
-    top: 290px;
+    top: 390px;
     left: 130px;
 }
 
 #f {
     position: absolute;
-    top: 290px;
+    top: 390px;
     left: 340px;
 }
 
 #g {
     position: absolute;
-    top: 290px;
+    top: 390px;
     left: 550px;
 }
 
 #h {
     position: absolute;
-    top: 290px;
+    top: 390px;
     left: 760px;
 }
 
 #i {
     position: absolute;
-    top: 500px;
+    top: 600px;
     left: 130px;
 }
 
 #j {
     position: absolute;
-    top: 500px;
+    top: 600px;
     left: 340px;
+}
+
+@keyframes shrinkText {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+#count_last {
+    position: absolute;
+    top: 580px;
+    left: 680px;
+    font-size: 150px;
+    font-weight: bold;
+    margin: 0;
+    color: white;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+}
+
+.shrink {
+    display: inline-block;
+    animation: shrinkText 1.02s ease-in-out infinite;
 }
 
 a {
@@ -108,7 +172,7 @@ a {
 }
 
 .chose {
-    border: solid 3px blue;
+    border: solid 4px red;
 }
 
 .noChoose {
@@ -117,7 +181,7 @@ a {
 
 #maru, #batsu {
     position: absolute;
-    top: 140px;
+    top: 240px;
     left: 270px;
     z-index: 10000;
     pointer-events: none;
@@ -127,7 +191,7 @@ a {
 
 #gameover, #clear {
     position: absolute;
-    top: 140px;
+    top: 240px;
     left: 140px;
     z-index: 10000;
     pointer-events: none;
@@ -139,10 +203,12 @@ a {
     display: none;
 }
 
-.mieru {
-    display: flex;
+.under {
+    position: absolute;
+    top: 405px;
 }
 
-.under {
-    margin-top: 300px;
+.up {
+    top: 200px !important;
+    left: 450px !important;
 }
