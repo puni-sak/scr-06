@@ -258,6 +258,7 @@ document.addEventListener('keydown', event => {
           gameover.classList.remove("mienai");
           gameover.classList.add("mieru");
           tenmetsu.classList.add("red");
+          countdown.pause();
           gameoverOto.currentTime = 0;
           gameoverOto.play();
         }, 300);
