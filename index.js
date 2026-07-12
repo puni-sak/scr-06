@@ -179,6 +179,21 @@ choose.forEach((chosing) => {
     });
 });
 
+//途中のユーザー操作なしの再生を許可してくれるらしい
+window.addEventListener("touchstart", () => {
+  bgm.play().catch(()=>{});
+  bgm.pause();
+  bgm.currentTime = 0;
+
+  countdown.play().catch(()=>{});
+  countdown.pause();
+  countdown.currentTime = 0;
+
+  gameoverOto.play().catch(()=>{});
+  gameoverOto.pause();
+  gameoverOto.currentTime = 0;
+}, { once: true });
+  
 //キーボード操作
 const maru = document.getElementById('maru');
 const batsu = document.getElementById('batsu');
