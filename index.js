@@ -221,7 +221,7 @@ document.addEventListener('keydown', event => {
     bgm.currentTime = 0;
     bgm.play();
 
-    let time = 10;
+    let time = 60;
     timer = setInterval(() => {
       time--;
 
