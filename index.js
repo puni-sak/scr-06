@@ -2,107 +2,107 @@
 
 //問題文を格納
 let mondaibun1 = [
-  '吹奏楽で使う楽器　10個答えろ',
-  '問題文２',
-  '問題文３',
-  '問題文４',
-  '問題文５',
-  '問題文６',
-  '問題文７',
-  '問題文８',
-  '問題文９',
-  '問題文１０'
+  "Q. 吹奏楽で使う楽器の名称 10個答えろ",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
 ];
 
 let mondaibun2 = [
-  '問題文１',
-  '問題文２',
-  '問題文３',
-  '問題文４',
-  '問題文５',
-  '問題文６',
-  '問題文７',
-  '問題文８',
-  '問題文９',
-  '問題文１０'
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
 ];
 
 let mondaibun3 = [
-  '問題文１',
-  '問題文２',
-  '問題文３',
-  '問題文４',
-  '問題文５',
-  '問題文６',
-  '問題文７',
-  '問題文８',
-  '問題文９',
-  '問題文１０'
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
 ];
 
 let mondaibun4 = [
-  '問題文１',
-  '問題文２',
-  '問題文３',
-  '問題文４',
-  '問題文５',
-  '問題文６',
-  '問題文７',
-  '問題文８',
-  '問題文９',
-  '問題文１０'
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
 ];
 
 let mondaibun5 = [
-  '問題文１',
-  '問題文２',
-  '問題文３',
-  '問題文４',
-  '問題文５',
-  '問題文６',
-  '問題文７',
-  '問題文８',
-  '問題文９',
-  '問題文１０'
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
 ];
 
 let mondaibun6 = [
-  '問題文１',
-  '問題文２',
-  '問題文３',
-  '問題文４',
-  '問題文５',
-  '問題文６',
-  '問題文７',
-  '問題文８',
-  '問題文９',
-  '問題文１０'
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
 ];
 
 let mondaibun7 = [
-  '問題文１',
-  '問題文２',
-  '問題文３',
-  '問題文４',
-  '問題文５',
-  '問題文６',
-  '問題文７',
-  '問題文８',
-  '問題文９',
-  '問題文１０'
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
 ];
 
 let mondaibun8 = [
-  '問題文１',
-  '問題文２',
-  '問題文３',
-  '問題文４',
-  '問題文５',
-  '問題文６',
-  '問題文７',
-  '問題文８',
-  '問題文９',
-  '問題文１０'
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  ""
 ];
 
 //タイトル(問題セットの番号)を取得
@@ -141,7 +141,26 @@ const mondaibunn = document.getElementById("mondaibun");
 
 mondaibunn.innerHTML = mondaibun[0];
 
-mondaibunn.classList.remove("under");
+//画像がないとき
+window.addEventListener("load", () => {
+  const imgs = document.querySelectorAll("img");
+
+  imgs.forEach(img => {
+    img.onerror = () => {
+      img.style.display = "none";   // 読み込み失敗 → 非表示
+      mondaibunn.classList.add("under");
+    };
+
+    img.onload = () => {
+      img.style.display = "";
+    };
+
+    const observer = new MutationObserver(() => {
+    });
+
+    observer.observe(img, { attributes: true, attributeFilter: ["src"]});
+  });
+});
 
 //答える問題を選択
 const choose = document.querySelectorAll(".choose");
@@ -170,6 +189,9 @@ const fuseikaiOto = document.getElementById('fuseikai');
 const clearOto = document.getElementById('clearOto');
 const gameoverOto = document.getElementById('gameoverOto');
 const bgm = document.getElementById("bgm");
+const countdown = document.getElementById("countdown");
+const tenmetsu = document.getElementById("tenmetsu");
+const count_last = document.getElementById("count_last");
 
 bgm.volume = 0.5;
 seikaiOto.volume = 0.6;
@@ -185,8 +207,76 @@ let batsuKesu = function() {
   batsu.classList.add("mienai");
 }
 
+let timer;
+
 //キーが押されたら
 document.addEventListener('keydown', event => {
+
+  //aが押されたらbgm再生＆カウントダウンスタート
+  if(event.key == "a") {
+    clearInterval(timer);
+    tenmetsu.classList.remove("red");
+    tenmetsu.classList.remove("tenmetsu");
+    count_last.classList.add("mienai");
+    bgm.currentTime = 0;
+    bgm.play();
+
+    let time = 10;
+    timer = setInterval(() => {
+      time--;
+
+      if (time == 5) {
+        bgm.pause();
+        countdown.currentTime = 0;
+        countdown.play();
+        tenmetsu.classList.add("tenmetsu");
+        count_last.classList.remove("up");
+        if (mondaibunn.classList.contains("under")) {
+          count_last.classList.add("up");
+        }
+        count_last.classList.remove("mienai");
+        count_last.classList.add("shrink");
+        count_last.textContent = "5";
+      }
+      if (time == 4) {
+        count_last.textContent = "4";
+      }
+      if (time == 3) {
+        count_last.textContent = "3";
+      }
+      if (time == 2) {
+        count_last.textContent = "2";
+      }
+      if (time == 1) {
+        count_last.textContent = "1";
+      }
+      if (time <= 0) {
+        clearInterval(timer);
+        tenmetsu.classList.remove("tenmetsu");
+        count_last.classList.add("mienai");
+        setTimeout(() => {
+          gameover.classList.remove("mienai");
+          gameover.classList.add("mieru");
+          tenmetsu.classList.add("red");
+          gameoverOto.currentTime = 0;
+          gameoverOto.play();
+        }, 300);
+      }
+    }, 1000);
+  }
+
+  //lが押されたら緊急ストップ
+  if(event.key == "l") {
+    clearInterval(timer);
+    tenmetsu.classList.remove("red");
+    tenmetsu.classList.remove("tenmetsu");
+    count_last.classList.add("mienai");
+    bgm.pause();
+    countdown.pause();
+    gameover.classList.add("mienai");
+    clear.classList.add("mienai");
+    gameoverOto.pause();
+  }
 
   //1が押されたらマル
   if(event.key == "1") {
@@ -215,8 +305,11 @@ document.addEventListener('keydown', event => {
       clear.classList.remove("mienai");
       clear.classList.add("mieru");
       bgm.pause();
+      countdown.pause();
+      clearInterval(timer);
       clearOto.currentTime = 0;
       clearOto.play();
+
     }
     else {
       clear.classList.remove("mieru");
@@ -243,6 +336,7 @@ document.addEventListener('keydown', event => {
   if(event.key == "Backspace") {
     mondaibangou = mondaibangou - 1;
     mondaibunn.classList.remove("under");
+    tenmetsu.classList.remove("red");
 
     if (mondaibangou < 0) {
       window.open("../../index.html", "_self");
@@ -272,6 +366,7 @@ document.addEventListener('keydown', event => {
   if(event.key == "Enter") {
     mondaibangou = mondaibangou + 1;
     mondaibunn.classList.remove("under");
+    tenmetsu.classList.remove("red");
 
     //10問目なら終わり
     if(mondaibangou == mondaibun.length) {
@@ -303,30 +398,6 @@ document.addEventListener('keydown', event => {
     gameover.classList.remove("mieru");
     gameover.classList.add("mienai");
   }
-
-  //spaceが押されたらbgm再生
-  if(event.key == "a") {
-    bgm.currentTime = 0;
-    bgm.play();
-  }
 }, false);
-
-//画像がないとき
-window.addEventListener("DOMContentLoaded", () => {
-  const imgs = document.querySelectorAll("img");
-
-  imgs.forEach(img => {
-    img.onerror = () => {
-      img.style.display = "none";   // 読み込み失敗 → 非表示
-      mondaibunn.classList.add("under");
-    };
-
-    const observer = new MutationObserver(() => {
-      img.style.display = "";
-    });
-
-    observer.observe(img, { attributes: true, attributeFilter: ["src"]});
-  });
-});
 
 })();
