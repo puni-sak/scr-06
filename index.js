@@ -196,9 +196,9 @@ window.addEventListener("touchstart", () => {
 
 //連打に強くなるらしい
 function playSE(audioElement) {
-  const se = audioElement.cloneNode(); // ← 新しい音を作る
+  const se = audioElement.cloneNode(true);
   se.currentTime = 0;
-  se.play();
+  se.play().catch(()=>{});
 }
   
 //キーボード操作
