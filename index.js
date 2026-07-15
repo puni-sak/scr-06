@@ -1,109 +1,113 @@
 (() => {
 
 //問題文を格納
-let mondaibun1 = [
+const mondaibun1 = [
   "Q. 吹奏楽で使う楽器の名称 10個答えろ",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  ""
+  "Q. 問題文だよー",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q."
 ];
 
-let mondaibun2 = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  ""
+const mondaibun2 = [
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q."
 ];
 
-let mondaibun3 = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  ""
+const mondaibun3 = [
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q."
 ];
 
-let mondaibun4 = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  ""
+const mondaibun4 = [
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q."
 ];
 
-let mondaibun5 = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  ""
+const mondaibun5 = [
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q."
 ];
 
-let mondaibun6 = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  ""
+const mondaibun6 = [
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q."
 ];
 
-let mondaibun7 = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  ""
+const mondaibun7 = [
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q."
 ];
 
-let mondaibun8 = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  ""
+const mondaibun8 = [
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q.",
+  "Q."
 ];
+
+//時間制限(秒)
+let time = 60;
+
 
 //タイトル(問題セットの番号)を取得
 const title = document.title;
@@ -140,6 +144,37 @@ let mondaibangou = 0;
 const mondaibunn = document.getElementById("mondaibun");
 
 mondaibunn.innerHTML = mondaibun[0];
+
+//ｆボタンでフルスクリーンにするらしい
+window.addEventListener('load', function(){
+  // キーボード入力の受付
+  window.addEventListener('keydown', switchFullScreen);
+});
+
+// 表示を切り替える
+function switchFullScreen(event) {
+
+  if (event.key === "f") {
+        
+    // フルスクリーン表示なら解除する
+    if (checkFullScreen() ) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+
+    //通常画面ならフルスクリーンにする
+    } else {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+    }
+  }
+}
+
+// フルスクリーン表示しているか確認
+function checkFullScreen() {
+  return Boolean(document.fullscreenElement);
+}
 
 //画像がないとき
 window.addEventListener("load", () => {
@@ -200,7 +235,7 @@ function playSE(audioElement) {
   se.currentTime = 0;
   se.play().catch(()=>{});
 }
-  
+
 //キーボード操作
 const maru = document.getElementById('maru');
 const batsu = document.getElementById('batsu');
@@ -221,11 +256,9 @@ clearOto.volume = 0.5;
 gameoverOto.volume = 0.9;
 
 let maruKesu = function() {
-  maru.classList.remove("mieru");
   maru.classList.add("mienai");
 }
 let batsuKesu = function() {
-  batsu.classList.remove("mieru");
   batsu.classList.add("mienai");
 }
 
@@ -239,43 +272,28 @@ document.addEventListener('keydown', event => {
     clearInterval(timer);
     tenmetsu.classList.remove("red");
     tenmetsu.classList.remove("tenmetsu");
-    count_last.classList.add("mienai");
+    count_last.classList.remove("mienai");
+    count_last.textContent = "60";
+    countdown.pause();
+    clearOto.pause();
+    gameoverOto.pause();
     bgm.currentTime = 0;
     bgm.play();
 
-    let time = 60;
     timer = setInterval(() => {
       time--;
+      count_last.classList.remove("mienai");
+      count_last.textContent = time;
 
       if (time == 5) {
         bgm.pause();
         countdown.currentTime = 0;
         countdown.play();
         tenmetsu.classList.add("tenmetsu");
-        count_last.classList.remove("up");
-        if (mondaibunn.classList.contains("under")) {
-          count_last.classList.add("up");
-        }
-        count_last.classList.remove("mienai");
-        count_last.classList.add("shrink");
-        count_last.textContent = "5";
-      }
-      if (time == 4) {
-        count_last.textContent = "4";
-      }
-      if (time == 3) {
-        count_last.textContent = "3";
-      }
-      if (time == 2) {
-        count_last.textContent = "2";
-      }
-      if (time == 1) {
-        count_last.textContent = "1";
       }
       if (time <= 0) {
         clearInterval(timer);
         tenmetsu.classList.remove("tenmetsu");
-        count_last.classList.add("mienai");
         setTimeout(() => {
           gameover.classList.remove("mienai");
           gameover.classList.add("mieru");
@@ -324,7 +342,10 @@ document.addEventListener('keydown', event => {
   if(event.key == "3") {
     if(clear.classList.contains("mienai")) {
       clear.classList.remove("mienai");
-      clear.classList.add("mieru");
+      tenmetsu.classList.remove("red");
+      tenmetsu.classList.remove("tenmetsu");
+      count_last.classList.add("mienai");
+      gameoverOto.pause();
       bgm.pause();
       countdown.pause();
       clearInterval(timer);
@@ -333,7 +354,6 @@ document.addEventListener('keydown', event => {
 
     }
     else {
-      clear.classList.remove("mieru");
       clear.classList.add("mienai");
     }
   }
@@ -342,13 +362,12 @@ document.addEventListener('keydown', event => {
   if(event.key == "4") {
     if(gameover.classList.contains("mienai")) {
       gameover.classList.remove("mienai");
-      gameover.classList.add("mieru");
+      clearOto.pause();
       bgm.pause();
       gameoverOto.currentTime = 0;
       gameoverOto.play();
     }
     else {
-      gameover.classList.remove("mieru");
       gameover.classList.add("mienai");
     }
   }
@@ -358,6 +377,8 @@ document.addEventListener('keydown', event => {
     mondaibangou = mondaibangou - 1;
     mondaibunn.classList.remove("under");
     tenmetsu.classList.remove("red");
+    gameover.classList.add("mienai");
+    clear.classList.add("mienai");
 
     if (mondaibangou < 0) {
       window.open("../../index.html", "_self");
