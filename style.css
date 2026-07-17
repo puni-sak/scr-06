@@ -82,18 +82,18 @@ img {
 
 #count_last {
     position: absolute;
-    height: 10%;
-    width: 10%;
+    height: 14%;
+    width: 14%;
     background-image: url(./images/timer.png);
     background-size: 90%;
     background-position: center;
     background-repeat: no-repeat;
     margin: 0;
     padding-top: 3%;
-    font-size: 200%;
+    font-size: 300%;
     font-weight: bold;
     text-align: center;
-    right: 5%;
+    right: 0;
     top: 0;
     color: black;
 }
