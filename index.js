@@ -270,10 +270,11 @@ document.addEventListener('keydown', event => {
   //aが押されたらbgm再生＆カウントダウンスタート
   if(event.key == "a") {
     clearInterval(timer);
+    time = 60;
     tenmetsu.classList.remove("red");
     tenmetsu.classList.remove("tenmetsu");
     count_last.classList.remove("mienai");
-    count_last.textContent = "60";
+    count_last.textContent = time;
     countdown.pause();
     clearOto.pause();
     gameoverOto.pause();
@@ -355,20 +356,6 @@ document.addEventListener('keydown', event => {
     }
     else {
       clear.classList.add("mienai");
-    }
-  }
-
-  //4が押されたらゲームオーバー
-  if(event.key == "4") {
-    if(gameover.classList.contains("mienai")) {
-      gameover.classList.remove("mienai");
-      clearOto.pause();
-      bgm.pause();
-      gameoverOto.currentTime = 0;
-      gameoverOto.play();
-    }
-    else {
-      gameover.classList.add("mienai");
     }
   }
 
