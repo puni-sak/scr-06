@@ -252,7 +252,7 @@ const count_last = document.getElementById("count_last");
 
 bgm.volume = 0.5;
 seikaiOto.volume = 0.6;
-clearOto.volume = 0.5;
+clearOto.volume = 0.7;
 gameoverOto.volume = 0.9;
 
 let maruKesu = function() {
