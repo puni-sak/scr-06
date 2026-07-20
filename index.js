@@ -139,11 +139,9 @@ else{
   mondaibun = mondaibun8;
 }
 
-let mondaibangou = 0;
+let mondaibangou = 1;
 
 const mondaibunn = document.getElementById("mondaibun");
-
-mondaibunn.innerHTML = mondaibun[0];
 
 //ｆボタンでフルスクリーンにするらしい
 window.addEventListener('load', function(){
@@ -249,6 +247,7 @@ const bgm = document.getElementById("bgm");
 const countdown = document.getElementById("countdown");
 const tenmetsu = document.getElementById("tenmetsu");
 const count_last = document.getElementById("count_last");
+const taiki = document.getElementById("taiki");
 
 bgm.volume = 0.5;
 seikaiOto.volume = 0.6;
@@ -366,28 +365,49 @@ document.addEventListener('keydown', event => {
     tenmetsu.classList.remove("red");
     gameover.classList.add("mienai");
     clear.classList.add("mienai");
+    count_last.classList.add("mienai");
 
-    if (mondaibangou < 0) {
-      window.open("../../index.html", "_self");
-    }
-    else {
-      document.getElementById("mondaibun").innerHTML = mondaibun[mondaibangou];
-      document.getElementById("a").src = `img${mondaibangou + 1}/a.jpg`;
-      document.getElementById("b").src = `img${mondaibangou + 1}/b.jpg`;
-      document.getElementById("c").src = `img${mondaibangou + 1}/c.jpg`;
-      document.getElementById("d").src = `img${mondaibangou + 1}/d.jpg`;
-      document.getElementById("e").src = `img${mondaibangou + 1}/e.jpg`;
-      document.getElementById("f").src = `img${mondaibangou + 1}/f.jpg`;
-      document.getElementById("g").src = `img${mondaibangou + 1}/g.jpg`;
-      document.getElementById("h").src = `img${mondaibangou + 1}/h.jpg`;
-      document.getElementById("i").src = `img${mondaibangou + 1}/i.jpg`;
-      document.getElementById("j").src = `img${mondaibangou + 1}/j.jpg`;
-
-      //初期化
+    //問題が表示されていたら背景だけの画面へ
+    if (mondaibangou % 2 == 1) {
+      mondaibunn.classList.add("mienai");
       choose.forEach((t) => {
-        t.classList.remove("noChoose");
-        t.classList.remove("chose");
+        t.classList.add("mienai");
       });
+      if ((mondaibangou != 1) && (mondaibangou != mondaibun.length * 2 + 1)) {
+        taiki.classList.remove("mienai");
+      }
+    }
+
+    //待機画面なら問題を表示
+    else {
+      mondaibunn.classList.remove("mienai");
+      taiki.classList.add("mienai");
+      choose.forEach((t) => {
+        t.classList.remove("mienai");
+      });
+
+      if (mondaibangou <= 0) {
+        window.open("../../index.html", "_self");
+      }
+      else {
+        document.getElementById("mondaibun").innerHTML = mondaibun[mondaibangou / 2 - 1];
+        document.getElementById("a").src = `img${mondaibangou / 2}/a.jpg`;
+        document.getElementById("b").src = `img${mondaibangou / 2}/b.jpg`;
+        document.getElementById("c").src = `img${mondaibangou / 2}/c.jpg`;
+        document.getElementById("d").src = `img${mondaibangou / 2}/d.jpg`;
+        document.getElementById("e").src = `img${mondaibangou / 2}/e.jpg`;
+        document.getElementById("f").src = `img${mondaibangou / 2}/f.jpg`;
+        document.getElementById("g").src = `img${mondaibangou / 2}/g.jpg`;
+        document.getElementById("h").src = `img${mondaibangou / 2}/h.jpg`;
+        document.getElementById("i").src = `img${mondaibangou / 2}/i.jpg`;
+        document.getElementById("j").src = `img${mondaibangou / 2}/j.jpg`;
+
+        //初期化
+        choose.forEach((t) => {
+          t.classList.remove("noChoose");
+          t.classList.remove("chose");
+        });
+      }
     }
   }
 
@@ -396,36 +416,56 @@ document.addEventListener('keydown', event => {
     mondaibangou = mondaibangou + 1;
     mondaibunn.classList.remove("under");
     tenmetsu.classList.remove("red");
-
-    //10問目なら終わり
-    if(mondaibangou == mondaibun.length) {
-      window.open("../../index.html", "_self");
-    }
-    //問題文・画像を次の問題用に変更
-    else {
-      document.getElementById("mondaibun").innerHTML = mondaibun[mondaibangou];
-      document.getElementById("a").src = `img${mondaibangou + 1}/a.jpg`;
-      document.getElementById("b").src = `img${mondaibangou + 1}/b.jpg`;
-      document.getElementById("c").src = `img${mondaibangou + 1}/c.jpg`;
-      document.getElementById("d").src = `img${mondaibangou + 1}/d.jpg`;
-      document.getElementById("e").src = `img${mondaibangou + 1}/e.jpg`;
-      document.getElementById("f").src = `img${mondaibangou + 1}/f.jpg`;
-      document.getElementById("g").src = `img${mondaibangou + 1}/g.jpg`;
-      document.getElementById("h").src = `img${mondaibangou + 1}/h.jpg`;
-      document.getElementById("i").src = `img${mondaibangou + 1}/i.jpg`;
-      document.getElementById("j").src = `img${mondaibangou + 1}/j.jpg`;
-
-      //初期化
-      choose.forEach((t) => {
-        t.classList.remove("noChoose");
-        t.classList.remove("chose");
-      });
-    }
-
-    clear.classList.remove("mieru");
     clear.classList.add("mienai");
-    gameover.classList.remove("mieru");
     gameover.classList.add("mienai");
+    console.log(mondaibangou / 2);
+    count_last.classList.add("mienai");
+
+    //問題が表示されていたら背景だけの画面へ
+    if (mondaibangou % 2 == 1) {
+      mondaibunn.classList.add("mienai");
+      choose.forEach((t) => {
+        t.classList.add("mienai");
+      });
+
+      if ((mondaibangou != 1) && (mondaibangou != mondaibun.length * 2 + 1)) {
+        taiki.classList.remove("mienai");
+      }
+    }
+
+    //待機画面なら問題を表示
+    else {
+      mondaibunn.classList.remove("mienai");
+      taiki.classList.add("mienai");
+      choose.forEach((t) => {
+        t.classList.remove("mienai");
+      });
+
+      //最終問題が終わってたら終わり
+      if(mondaibangou == mondaibun.length * 2 + 2) {
+        window.open("../../index.html", "_self");
+      }
+      else {
+        //問題文・画像を次の問題用に変更
+        document.getElementById("mondaibun").innerHTML = mondaibun[mondaibangou / 2 - 1];
+        document.getElementById("a").src = `img${mondaibangou / 2}/a.jpg`;
+        document.getElementById("b").src = `img${mondaibangou / 2}/b.jpg`;
+        document.getElementById("c").src = `img${mondaibangou / 2}/c.jpg`;
+        document.getElementById("d").src = `img${mondaibangou / 2}/d.jpg`;
+        document.getElementById("e").src = `img${mondaibangou / 2}/e.jpg`;
+        document.getElementById("f").src = `img${mondaibangou / 2}/f.jpg`;
+        document.getElementById("g").src = `img${mondaibangou / 2}/g.jpg`;
+        document.getElementById("h").src = `img${mondaibangou / 2}/h.jpg`;
+        document.getElementById("i").src = `img${mondaibangou / 2}/i.jpg`;
+        document.getElementById("j").src = `img${mondaibangou / 2}/j.jpg`;
+
+        //初期化
+        choose.forEach((t) => {
+          t.classList.remove("noChoose");
+          t.classList.remove("chose");
+        });
+      }
+    }
   }
 }, false);
 
