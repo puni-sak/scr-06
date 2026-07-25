@@ -1,178 +1,78 @@
 (() => {
 
+//入力コーナー
+
 //問題文を格納
-const mondaibun1 = [
-  "Q. 吹奏楽で使う楽器の名称 10個答えろ",
-  "Q. 問題文だよー",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q."
+const mondaibun = [
+  //1
+  ["Q. 吹奏楽で使う楽器の名称 10個答えろ","Q. 問題文だよー"],
+  //2
+  ["Q. 21","Q. 22"],
+  //3
+  ["Q. 31","Q. 32"],
+  //4
+  ["Q. 41","Q. 42"],
+  //5
+  ["Q. 51","Q. 52"],
+  //6
+  ["Q. 61","Q. 62"],
+  //7
+  ["Q. 71","Q. 72"],
+  //8
+  ["Q. 81","Q. 82"],
+  //9
+  ["Q. 91","Q. 92"],
+  //10
+  ["Q. 101","Q. 102"],
+  //11
+  ["Q. 111","Q. 112"],
+  //12
+  ["Q. 121","Q. 122"],
+  //13
+  ["Q. 131","Q. 132"],
+  //14
+  ["Q. 141","Q. 142"],
+  //15
+  ["Q. 151","Q. 152"],
+  //16
+  ["Q. 161","Q. 162"],
+  //17
+  ["Q. 171","Q. 172"],
+  //18
+  ["Q. 181","Q. 182"],
+  //19
+  ["Q. 191","Q. 192"],
+  //20
+  ["Q. 201","Q. 202"]
 ];
 
-const mondaibun2 = [
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q."
-];
+//問題セット数
+const setdayo = 20;
 
-const mondaibun3 = [
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q."
-];
-
-const mondaibun4 = [
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q."
-];
-
-const mondaibun5 = [
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q."
-];
-
-const mondaibun6 = [
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q."
-];
-
-const mondaibun7 = [
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q."
-];
-
-const mondaibun8 = [
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q.",
-  "Q."
-];
+//1人あたりの問題数
+const mondaisu = 2;
 
 //時間制限(秒)
 let time = 60;
 
 
-//タイトル(問題セットの番号)を取得
-const title = document.title;
-let setbangou = Number( title );
-let mondaibun = [];
+//処理コーナー
 
-if(setbangou == 1) {
-  mondaibun = mondaibun1;
-}
-else if(setbangou == 2) {
-  mondaibun = mondaibun2;
-}
-else if(setbangou == 3) {
-  mondaibun = mondaibun3;
-}
-else if(setbangou == 4) {
-  mondaibun = mondaibun4;
-}
-else if(setbangou == 5) {
-  mondaibun = mondaibun5;
-}
-else if(setbangou == 6) {
-  mondaibun = mondaibun6;
-}
-else if(setbangou == 7) {
-  mondaibun = mondaibun7;
-}
-else{
-  mondaibun = mondaibun8;
-}
+const gamenA = document.querySelectorAll(".gamenA");
+const gamenB = document.querySelectorAll(".gamenB");
+const mondaibunn = document.getElementById("mondaibun");
+const number = document.getElementById("number");
 
+let setbangou = 0;
 let mondaibangou = 1;
 
-const mondaibunn = document.getElementById("mondaibun");
+number.addEventListener("change", inputChange);
 
 //ｆボタンでフルスクリーンにするらしい
 window.addEventListener('load', function(){
   // キーボード入力の受付
   window.addEventListener('keydown', switchFullScreen);
 });
-
-// 表示を切り替える
-function switchFullScreen(event) {
-
-  if (event.key === "f") {
-        
-    // フルスクリーン表示なら解除する
-    if (checkFullScreen() ) {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      }
-
-    //通常画面ならフルスクリーンにする
-    } else {
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-      }
-    }
-  }
-}
-
-// フルスクリーン表示しているか確認
-function checkFullScreen() {
-  return Boolean(document.fullscreenElement);
-}
 
 //画像がないとき
 window.addEventListener("load", () => {
@@ -197,7 +97,6 @@ window.addEventListener("load", () => {
 
 //答える問題を選択
 const choose = document.querySelectorAll(".choose");
-
 choose.forEach((chosing) => {
 
     chosing.addEventListener("click", () => {
@@ -227,13 +126,6 @@ window.addEventListener("touchstart", () => {
   gameoverOto.currentTime = 0;
 }, { once: true });
 
-//連打に強くなるらしい
-function playSE(audioElement) {
-  const se = audioElement.cloneNode(true);
-  se.currentTime = 0;
-  se.play().catch(()=>{});
-}
-
 //キーボード操作
 const maru = document.getElementById('maru');
 const batsu = document.getElementById('batsu');
@@ -254,6 +146,7 @@ seikaiOto.volume = 0.6;
 clearOto.volume = 0.7;
 gameoverOto.volume = 0.9;
 
+//マルとバツを消すやつ
 let maruKesu = function() {
   maru.classList.add("mienai");
 }
@@ -263,8 +156,79 @@ let batsuKesu = function() {
 
 let timer;
 
+//functionコーナー
+
+// フルスクリーンの表示を切り替える
+function switchFullScreen(event) {
+
+  if (event.key === "f") {
+        
+    // フルスクリーン表示なら解除する
+    if (checkFullScreen() ) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+
+    //通常画面ならフルスクリーンにする
+    } else {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+    }
+  }
+}
+
+// フルスクリーン表示しているか確認
+function checkFullScreen() {
+  return Boolean(document.fullscreenElement);
+}
+
+//問題選択画面(A)に移動
+function changeGamenA() {
+  gamenA.forEach(element => {
+    element.classList.remove("mienai");
+  });
+  gamenB.forEach(element => {
+    element.classList.add("mienai");
+  });
+  document.removeEventListener("keydown", keyEvent);
+  number.value = "";
+}
+
+//問題の画面(B)に移動
+function changeGamenB() {
+  gamenA.forEach(element => {
+    element.classList.add("mienai");
+  });
+  gamenB.forEach(element => {
+    element.classList.remove("mienai");
+  });
+  document.addEventListener("keydown", keyEvent);
+  mondaibangou = 1;
+}
+
+//問題番号が入力されたら画面Bに遷移
+function inputChange() {
+  setbangou = Number( number.value );
+  if (Number.isNaN(setbangou) | setbangou <= 0 | (setdayo + 1) <= setbangou ) {
+    return; // 不正入力なら処理しない
+  }
+  changeGamenB();
+  mondaibunn.classList.add("mienai");
+  choose.forEach((t) => {
+    t.classList.add("mienai");
+  });
+}
+
+//マルバツが連打に強くなるらしい
+function playSE(audioElement) {
+  const se = audioElement.cloneNode(true);
+  se.currentTime = 0;
+  se.play().catch(()=>{});
+}
+
 //キーが押されたら
-document.addEventListener('keydown', event => {
+function keyEvent(event) {
 
   //aが押されたらbgm再生＆カウントダウンスタート
   if(event.key == "a") {
@@ -373,7 +337,7 @@ document.addEventListener('keydown', event => {
       choose.forEach((t) => {
         t.classList.add("mienai");
       });
-      if ((mondaibangou != 1) && (mondaibangou != mondaibun.length * 2 + 1)) {
+      if ((mondaibangou != 1) && (mondaibangou != mondaisu * 2 + 1)) {
         taiki.classList.remove("mienai");
       }
     }
@@ -387,20 +351,11 @@ document.addEventListener('keydown', event => {
       });
 
       if (mondaibangou <= 0) {
-        window.open("../../index.html", "_self");
+        changeGamenA();
+
       }
       else {
-        document.getElementById("mondaibun").innerHTML = mondaibun[mondaibangou / 2 - 1];
-        document.getElementById("a").src = `img${mondaibangou / 2}/a.jpg`;
-        document.getElementById("b").src = `img${mondaibangou / 2}/b.jpg`;
-        document.getElementById("c").src = `img${mondaibangou / 2}/c.jpg`;
-        document.getElementById("d").src = `img${mondaibangou / 2}/d.jpg`;
-        document.getElementById("e").src = `img${mondaibangou / 2}/e.jpg`;
-        document.getElementById("f").src = `img${mondaibangou / 2}/f.jpg`;
-        document.getElementById("g").src = `img${mondaibangou / 2}/g.jpg`;
-        document.getElementById("h").src = `img${mondaibangou / 2}/h.jpg`;
-        document.getElementById("i").src = `img${mondaibangou / 2}/i.jpg`;
-        document.getElementById("j").src = `img${mondaibangou / 2}/j.jpg`;
+        gazou();
 
         //初期化
         choose.forEach((t) => {
@@ -418,7 +373,6 @@ document.addEventListener('keydown', event => {
     tenmetsu.classList.remove("red");
     clear.classList.add("mienai");
     gameover.classList.add("mienai");
-    console.log(mondaibangou / 2);
     count_last.classList.add("mienai");
 
     //問題が表示されていたら背景だけの画面へ
@@ -428,7 +382,7 @@ document.addEventListener('keydown', event => {
         t.classList.add("mienai");
       });
 
-      if ((mondaibangou != 1) && (mondaibangou != mondaibun.length * 2 + 1)) {
+      if ((mondaibangou != 1) && (mondaibangou != mondaisu * 2 + 1)) {
         taiki.classList.remove("mienai");
       }
     }
@@ -442,22 +396,12 @@ document.addEventListener('keydown', event => {
       });
 
       //最終問題が終わってたら終わり
-      if(mondaibangou == mondaibun.length * 2 + 2) {
-        window.open("../../index.html", "_self");
+      if(mondaibangou == mondaisu * 2 + 2) {
+        changeGamenA();
       }
+      //問題文・画像を次の問題用に変更
       else {
-        //問題文・画像を次の問題用に変更
-        document.getElementById("mondaibun").innerHTML = mondaibun[mondaibangou / 2 - 1];
-        document.getElementById("a").src = `img${mondaibangou / 2}/a.jpg`;
-        document.getElementById("b").src = `img${mondaibangou / 2}/b.jpg`;
-        document.getElementById("c").src = `img${mondaibangou / 2}/c.jpg`;
-        document.getElementById("d").src = `img${mondaibangou / 2}/d.jpg`;
-        document.getElementById("e").src = `img${mondaibangou / 2}/e.jpg`;
-        document.getElementById("f").src = `img${mondaibangou / 2}/f.jpg`;
-        document.getElementById("g").src = `img${mondaibangou / 2}/g.jpg`;
-        document.getElementById("h").src = `img${mondaibangou / 2}/h.jpg`;
-        document.getElementById("i").src = `img${mondaibangou / 2}/i.jpg`;
-        document.getElementById("j").src = `img${mondaibangou / 2}/j.jpg`;
+        gazou();
 
         //初期化
         choose.forEach((t) => {
@@ -467,6 +411,21 @@ document.addEventListener('keydown', event => {
       }
     }
   }
-}, false);
+}
+
+//画像の切り替え用
+function gazou() {
+  mondaibunn.innerHTML = mondaibun[setbangou - 1][mondaibangou / 2 - 1];
+  document.getElementById("a").src = `mondai_imgs/${setbangou}/img${mondaibangou / 2}/a.jpg`;
+  document.getElementById("b").src = `mondai_imgs/${setbangou}/img${mondaibangou / 2}/b.jpg`;
+  document.getElementById("c").src = `mondai_imgs/${setbangou}/img${mondaibangou / 2}/c.jpg`;
+  document.getElementById("d").src = `mondai_imgs/${setbangou}/img${mondaibangou / 2}/d.jpg`;
+  document.getElementById("e").src = `mondai_imgs/${setbangou}/img${mondaibangou / 2}/e.jpg`;
+  document.getElementById("f").src = `mondai_imgs/${setbangou}/img${mondaibangou / 2}/f.jpg`;
+  document.getElementById("g").src = `mondai_imgs/${setbangou}/img${mondaibangou / 2}/g.jpg`;
+  document.getElementById("h").src = `mondai_imgs/${setbangou}/img${mondaibangou / 2}/h.jpg`;
+  document.getElementById("i").src = `mondai_imgs/${setbangou}/img${mondaibangou / 2}/i.jpg`;
+  document.getElementById("j").src = `mondai_imgs/${setbangou}/img${mondaibangou / 2}/j.jpg`;
+}
 
 })();
