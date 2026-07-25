@@ -9,16 +9,42 @@
 </head>
 
 <body>
-    <h2>問題を選択してください</h2>
-    <a href="mondai/1/1.html" class="btn">1</a>
-    <a href="mondai/2/2.html" class="btn">2</a>
-    <a href="mondai/3/3.html" class="btn">3</a>
-    <a href="mondai/4/4.html" class="btn">4</a>
+    <!-- 選択画面 -->
+    <h2 class="gamenA">問題番号を入力</h2>
+    <input type="text" id="number" class="gamenA" placeholder="半角数字(1～20)">
+
+    <!-- 問題 -->
+    <p id="tenmetsu" class="mienai"></p>
+
+    <h2 id="mondaibun" class="gamenB mienai"></h2>
+    <!-- 問題別画像 -->
+    <img class="choose gamenB mienai" id="a" src="">
+    <img class="choose gamenB mienai" id="b" src="">
+    <img class="choose gamenB mienai" id="c" src="">
+    <img class="choose gamenB mienai" id="d" src="">
+    <img class="choose gamenB mienai" id="e" src="">
     <br>
-    <a href="mondai/5/5.html" class="btn">5</a>
-    <a href="mondai/6/6.html" class="btn">6</a>
-    <a href="mondai/7/7.html" class="btn">7</a>
-    <a href="mondai/8/8.html" class="btn">8</a>
+    <img class="choose gamenB mienai" id="f" src="">
+    <img class="choose gamenB mienai" id="g" src="">
+    <img class="choose gamenB mienai" id="h" src="">
+    <img class="choose gamenB mienai" id="i" src="">
+    <img class="choose gamenB mienai" id="j" src="">
+    <p id="count_last" class="mienai"></p>
+
+    <h1 id="taiki" class="mienai">次の問題です</h1>
+
+    <!-- 共通画像 -->
+    <img id="maru" class="mienai" src="./images/maru.png">
+    <img id="batsu" class="mienai" src="./images/batsu.png">
+    <img id="gameover" class="mienai" src="./images/gameover.PNG">
+    <img id="clear" class="mienai" src="./images/clear.PNG">
+    <!-- 効果音・BGM -->
+    <audio id="bgm" src="./music/bgm.mp3"></audio>
+    <audio id="seikai" src="./music/seikai.wav"></audio>
+    <audio id="fuseikai" src="./music/fuseikai.wav"></audio>
+    <audio id="clearOto" src="./music/clear.mp3"></audio>
+    <audio id="gameoverOto" src="./music/gameover.mp3"></audio>
+    <audio id="countdown" src="./music/count.mp3"></audio>
 </body>
 <script src="./index.js"></script>
 </html>
