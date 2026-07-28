@@ -310,8 +310,8 @@ function keyEvent(event) {
     maru.classList.remove("mienai");
     maru.classList.add("mieru");
     setTimeout(maruKesu, 1000);
-    chose[0].classList.remove("choose");
-    chose[0].classList.add("noChoose");
+    chose[0]?.classList.remove("choose");
+    chose[0]?.classList.add("noChoose");
   }
 
   //2が押されたらバツ
