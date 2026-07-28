@@ -5,45 +5,65 @@
 //問題文を格納
 const mondaibun = [
   //1
-  ["Q. 吹奏楽で使う楽器の名称 10個答えろ","Q. 問題文だよー"],
+  ["Q. 地中海に面している国　10コ答えよ",
+   "Q. 東京オリンピックで使用されたピクトグラムが表す競技名　10コ答えよ"],
   //2
-  ["Q. 21","Q. 22"],
+  ["Q. それぞれの国旗が表す国名　10コ答えよ",
+   "Q. 四日市高校に通うことのできる三重県の北中部の市町村　10コ答えよ"],
   //3
-  ["Q. 31","Q. 32"],
+  ["Q. それぞれの地図記号は何を表しているか　10コ答えよ",
+   "Q. 世界の1人あたりGDP上位25位までの国　10コ答えよ"],
   //4
-  ["Q. 41","Q. 42"],
+  ["Q. 日本の祝日　10コ答えよ",
+   "Q. 昨年、四日市高校から3人以上進学した国公立大学　10コ答えよ"],
   //5
-  ["Q. 51","Q. 52"],
+  ["Q. 日本人に多い名字上位15位までのもの　10コ答えよ",
+   "Q. アメリカの州　10コ答えよ"],
   //6
-  ["Q. 61","Q. 62"],
+  ["Q. 日本の政令指定都市　10コ答えよ",
+   "Q. 近鉄名古屋線で急行が止まる駅(松阪以南を除く)　10コ答えよ"],
   //7
-  ["Q. 71","Q. 72"],
+  ["Q. 漢数字の入ったことわざ　10コ答えよ",
+   "Q. 日本の中央省庁　10コ答えよ"],
   //8
-  ["Q. 81","Q. 82"],
+  ["Q. 面積の大きい都道府県上位15位までの都道府県　10コ答えよ",
+   "Q. それぞれの元素記号があらわす元素　10コ答えよ"],
   //9
-  ["Q. 91","Q. 92"],
+  ["Q. 91",
+   "Q. 92"],
   //10
-  ["Q. 101","Q. 102"],
+  ["Q. 101",
+   "Q. 102"],
   //11
-  ["Q. 111","Q. 112"],
+  ["Q. 111",
+   "Q. 112"],
   //12
-  ["Q. 121","Q. 122"],
+  ["Q. 121",
+   "Q. 122"],
   //13
-  ["Q. 131","Q. 132"],
+  ["Q. 131",
+   "Q. 132"],
   //14
-  ["Q. 141","Q. 142"],
+  ["Q. 141",
+   "Q. 142"],
   //15
-  ["Q. 151","Q. 152"],
+  ["Q. 151",
+   "Q. 152"],
   //16
-  ["Q. 161","Q. 162"],
+  ["Q. 161",
+   "Q. 162"],
   //17
-  ["Q. 171","Q. 172"],
+  ["Q. 171",
+   "Q. 172"],
   //18
-  ["Q. 181","Q. 182"],
+  ["Q. 181",
+   "Q. 182"],
   //19
-  ["Q. 191","Q. 192"],
+  ["Q. 191",
+   "Q. 192"],
   //20
-  ["Q. 201","Q. 202"]
+  ["Q. 201",
+   "Q. 202"]
 ];
 
 //問題セット数
@@ -131,6 +151,7 @@ const maru = document.getElementById('maru');
 const batsu = document.getElementById('batsu');
 const gameover = document.getElementById('gameover');
 const clear = document.getElementById('clear');
+const next = document.getElementById("next");
 const seikaiOto = document.getElementById('seikai');
 const fuseikaiOto = document.getElementById('fuseikai');
 const clearOto = document.getElementById('clearOto');
@@ -139,7 +160,6 @@ const bgm = document.getElementById("bgm");
 const countdown = document.getElementById("countdown");
 const tenmetsu = document.getElementById("tenmetsu");
 const count_last = document.getElementById("count_last");
-const taiki = document.getElementById("taiki");
 
 bgm.volume = 0.5;
 seikaiOto.volume = 0.6;
@@ -338,14 +358,14 @@ function keyEvent(event) {
         t.classList.add("mienai");
       });
       if ((mondaibangou != 1) && (mondaibangou != mondaisu * 2 + 1)) {
-        taiki.classList.remove("mienai");
+        next.classList.remove("mienai");
       }
     }
 
     //待機画面なら問題を表示
     else {
       mondaibunn.classList.remove("mienai");
-      taiki.classList.add("mienai");
+      next.classList.add("mienai");
       choose.forEach((t) => {
         t.classList.remove("mienai");
       });
@@ -383,14 +403,14 @@ function keyEvent(event) {
       });
 
       if ((mondaibangou != 1) && (mondaibangou != mondaisu * 2 + 1)) {
-        taiki.classList.remove("mienai");
+        next.classList.remove("mienai");
       }
     }
 
     //待機画面なら問題を表示
     else {
       mondaibunn.classList.remove("mienai");
-      taiki.classList.add("mienai");
+      next.classList.add("mienai");
       choose.forEach((t) => {
         t.classList.remove("mienai");
       });
