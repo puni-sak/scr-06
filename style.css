@@ -103,6 +103,13 @@ img {
     color: black;
 }
 
+#next {
+    color: white;
+    margin: auto;
+    width: 80%;
+    height: auto;
+}
+
 #taiki {
     position: absolute;
     color: white;
