@@ -60,6 +60,11 @@ body {
     border-bottom: none;/*線を消す*/
 }
 
+#number {
+    height: 30px;
+    width: 100px;
+}
+
 h2 {
     display: block;
     text-align: center;
